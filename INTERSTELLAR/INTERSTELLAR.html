@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interestellar - Página de Fans</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background-color: black;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        color: white;
+    }
+
+    /* Estrellas animadas */
+    .star {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0.8;
+    }
+
+    /* Imagen de fondo decorativa */
+    .background-img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 80%;
+        max-height: 80%;
+        opacity: 0.3;
+        z-index: 1;
+    }
+
+    /* Contenedor del texto */
+    .intro {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        max-width: 90%;
+        animation: fadeIn 3s ease-in-out forwards;
+        opacity: 0;
+        z-index: 2;
+    }
+
+    .intro h1 {
+        font-size: 3em;
+        margin-bottom: 0.5em;
+    }
+
+    .intro p {
+        font-size: 1.5em;
+        line-height: 1.5em;
+    }
+
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+
+    /* BOTÓN EXPLORAR COMO HIPERVÍNCULO */
+    .explore-btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 30px;
+        font-size: 1.2em;
+        color: black;
+        background-color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    }
+
+    .explore-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px white, 0 0 30px #00f, 0 0 40px #0ff;
+        background-color: #e0e0ff;
+    }
+</style>
+</head>
+<body>
+
+<!-- Imagen de fondo -->
+<img src="COOPER.jpg" alt="Interestellar" class="background-img">
+
+<!-- Contenedor del texto -->
+<div class="intro">
+    <h1>Interestellar</h1>
+    <p>
+        En un futuro cercano, la humanidad lucha por sobrevivir mientras el tiempo se convierte en un enemigo.<br>
+        Atrévete a viajar más allá de nuestro sistema solar y descubrir los secretos del universo.
+    </p>
+    <!-- Botón convertido en hipervínculo con efecto de viaje -->
+    <a href="#" class="explore-btn" id="explore-btn">Explorar</a>
+</div>
+
+<script>
+    const numStars = 200;
+    const stars = [];
+
+    // Crear estrellas con posición y movimiento aleatorio
+    for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+
+        const size = Math.random() * 2 + 1;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+
+        star.style.left = x + 'px';
+        star.style.top = y + 'px';
+
+        document.body.appendChild(star);
+
+        stars.push({
+            element: star,
+            x: x,
+            y: y,
+            speedX: (Math.random() - 0.5) * 0.2,
+            speedY: (Math.random() - 0.5) * 0.2
+        });
+    }
+
+    // Animación de estrellas
+    function animateStars() {
+        for (let i = 0; i < stars.length; i++) {
+            const star = stars[i];
+            star.x += star.speedX;
+            star.y += star.speedY;
+
+            if (star.x < 0) star.x = window.innerWidth;
+            if (star.x > window.innerWidth) star.x = 0;
+            if (star.y < 0) star.y = window.innerHeight;
+            if (star.y > window.innerHeight) star.y = 0;
+
+            star.element.style.left = star.x + 'px';
+            star.element.style.top = star.y + 'px';
+        }
+        requestAnimationFrame(animateStars);
+    }
+
+    animateStars();
+
+    // EFECTO HIPERVEL PARA EL BOTÓN EXPLORAR
+    const exploreBtn = document.getElementById('explore-btn');
+    exploreBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // evitar navegación inmediata
+
+        // Acelerar las estrellas mucho más rápido
+        for (let star of stars) {
+            star.speedX *= 30;  // velocidad 30×
+            star.speedY *= 30;
+            star.element.style.backgroundColor = '#0ff'; // efecto warp
+            star.element.style.opacity = 0.9;
+        }
+
+        // Duración más larga del viaje (3.5 segundos)
+        setTimeout(() => {
+            window.location.href = 'Contenido.html'; // redirige al contenido
+        }, 3500); // 3.5 segundos
+    });
+</script>
+
+</body>
+</html>

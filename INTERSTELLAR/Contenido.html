@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interestellar - Contenido</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: white; quita el boton volver  
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: black;
+    }
+
+    /* Contenedor de estrellas fijo */
+    #stars-container {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .star {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0.8;
+        transition: opacity 0.5s;
+    }
+
+    /* Imagen de fondo decorativa */
+    .background-img {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 80%;
+        max-height: 80%;
+        opacity: 0.3;
+        z-index: 1;
+    }
+
+    /* Contenedor del contenido */
+    .content {
+        position: relative;
+        z-index: 2;
+        max-width: 95%;
+        margin: 0 auto;
+        padding: 40px 10px;
+        text-align: center;
+    }
+
+    h1 { font-size: 3em; margin-bottom: 0.5em; }
+    h2 { font-size: 2em; margin-top: 40px; margin-bottom: 0.5em; }
+    p { font-size: 1.3em; line-height: 1.6; margin-bottom: 20px; }
+
+    .back-btn {
+        display: inline-block;
+        padding: 10px 25px;
+        margin-top: 20px;
+        font-size: 1.1em;
+        color: black;
+        background-color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .back-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px white, 0 0 30px #00f, 0 0 40px #0ff;
+        background-color: #e0e0ff;
+    }
+
+    .content-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 0 20px #fff;
+        transition: transform 0.5s;
+    }
+    .content-img:hover { transform: scale(1.05); }
+
+    .content-video {
+        max-width: 80%;
+        margin: 20px auto;
+        display: block;
+        border-radius: 10px;
+        box-shadow: 0 0 20px #fff;
+    }
+
+    /* Fade-in para secciones */
+    .section {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    .section.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Contenedor flexible para imagen + info */
+    .section-flex {
+        display: flex;
+        flex-direction: column; /* Por defecto móvil */
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    /* Texto de info de la imagen */
+    .img-info {
+        max-width: 90%;
+        text-align: center;
+        font-size: 1.2em;
+        line-height: 1.5em;
+    }
+
+    /* Para pantallas grandes, poner la imagen a la izquierda y texto a la derecha */
+    @media(min-width: 800px){
+        .section-flex {
+            flex-direction: row;
+            justify-content: center;
+            text-align: left;
+        }
+        .section-flex img {
+            max-width: 50%;
+        }
+        .section-flex .img-info {
+            max-width: 45%;
+            margin-left: 20px;
+        }
+    }
+
+    /* Sección de frases épicas */
+    .quotes-list {
+        list-style: none;
+        padding: 0;
+        font-size: 1.3em;
+        line-height: 1.8em;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .quotes-list li {
+        margin-bottom: 20px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border-left: 5px solid #0ff;
+        border-radius: 5px;
+        font-style: italic;
+        transition: transform 0.3s, background 0.3s;
+    }
+
+    .quotes-list li:hover {
+        transform: scale(1.05);
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+</style>
+</head>
+<body>
+
+<!-- Contenedor de estrellas -->
+<div id="stars-container"></div>
+
+<!-- Imagen de fondo -->
+<img src="AGUJERO.jpg" alt="Interestellar" class="background-img">
+
+<!-- Música de fondo -->
+<audio id="background-music" loop>
+    <source src="interestellar-music.mp3" type="audio/mpeg">
+    Tu navegador no soporta el audio.
+</audio>
+
+<div class="content">
+    <h1>Viaja más allá de las estrellas</h1>
+    
+    <!-- Introducción -->
+    <div class="section" id="intro">
+        <h2>Bienvenido a Interestellar</h2>
+        <div class="section-flex">
+            <p class="img-info">
+                En esta página descubrirás la épica aventura de la película <strong>Interestellar</strong>. 
+                Viajaremos junto a la tripulación de la nave Endurance a través de agujeros negros, planetas desconocidos y 
+                fenómenos que desafían el tiempo y el espacio. Explora los secretos de Gargantua, los mundos visitados y revive 
+                la emoción del trailer de la película.
+            </p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 1: Endurance -->
+    <div class="section">
+        <h2>La nave Endurance</h2>
+        <div class="section-flex">
+            <img src="endurance.jpg" alt="Nave Endurance" class="content-img">
+            <div class="img-info">
+                <p>La Endurance es la nave interestelar diseñada para soportar largos viajes a través del espacio profundo. 
+                Su misión: encontrar un nuevo hogar para la humanidad. La nave cuenta con tecnología avanzada, módulos 
+                de hibernación y sistemas de navegación capaces de enfrentar agujeros negros y planetas desconocidos.</p>
+                <p><strong>Dato curioso:</strong> Cada parte de la nave fue inspirada en ingeniería real para lograr un diseño 
+                verosímil y funcional.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 2: Gargantua -->
+    <div class="section">
+        <h2>Gargantua</h2>
+        <div class="section-flex">
+            <img src="gargantua.jpg" alt="Agujero Negro Gargantua" class="content-img">
+            <div class="img-info">
+                <p>Gargantua es un agujero negro supermasivo con una gravedad tan intensa que deforma el tiempo alrededor 
+                de él. Sus efectos visuales y científicos fueron diseñados con la ayuda de expertos en física teórica.</p>
+                <p><strong>Curiosidad:</strong> La película mostró de manera realista la dilatación temporal cerca de Gargantua, 
+                mostrando cómo el tiempo se ralentiza para los que están cerca del agujero negro.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 3: Planetas visitados -->
+    <div class="section">
+        <h2>Planetas Visitados</h2>
+        <div class="section-flex">
+            <img src="planetas.jpg" alt="Planetas Interestellar" class="content-img">
+            <div class="img-info">
+                <p>Durante la misión, la tripulación visita planetas con condiciones extremas: océanos gigantes, planetas helados 
+                y mundos con gravedad intensa. Cada planeta representa un desafío diferente para la supervivencia y la exploración.</p>
+                <p><strong>Dato interesante:</strong> La precisión científica de cada planeta fue revisada por físicos reales 
+                para reflejar fenómenos posibles en el universo.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 4: Video + control música -->
+    <div class="section">
+        <h2>Trailer de Interestellar</h2>
+        <video class="content-video" controls>
+            <source src="interestellar-trailer.mp4" type="video/mp4">
+            Tu navegador no soporta el video.
+        </video>
+        <button id="music-toggle" class="back-btn">Pausar música</button>
+    </div>
+
+    <!-- SECCIÓN 5: Frases épicas -->
+    <div class="section" id="quotes">
+        <h2>Frases Épicas de Interestellar</h2>
+        <div class="section-flex">
+            <ul class="quotes-list">
+                <li>"No podemos elegir de dónde venimos, pero podemos elegir a dónde vamos." – Cooper</li>
+                <li>"El amor es lo único que trasciende el tiempo y el espacio." – Amelia Brand</li>
+                <li>"Nunca dejes que la esperanza se apague." – Murph</li>
+                <li>"No estamos hechos solo para sobrevivir, estamos hechos para explorar." – Cooper</li>
+                <li>"A veces el sacrificio es necesario para un bien mayor." – Profesor Brand</li>
+                <li>"La humanidad debe mirar hacia las estrellas, no hacia los pies." – Cooper</li>
+                <li>"El tiempo es relativo, pero el amor es universal." – Amelia Brand</li>
+                <li>"Nunca subestimes el poder de la curiosidad humana." – Profesor Brand</li>
+                <li>"Cada decisión cuenta, incluso las que parecen pequeñas." – Murph</li>
+                <li>"El futuro de la humanidad depende de nuestra valentía hoy." – Cooper</li>
+            </ul>
+        </div>
+    </div>
+
+<!-- SECCIÓN: Frases de Científicos -->
+<div class="section" id="scientists-quotes">
+    <h2>Frases de Científicos en Interestellar</h2>
+    <div class="section-flex">
+        <ul class="quotes-list">
+            <li>"Exploramos porque no nos conformamos con lo que conocemos." – Profesor Brand</li>
+            <li>"La ciencia nos permite mirar el universo con ojos nuevos." – Amelia Brand</li>
+            <li>"El conocimiento es la clave para la supervivencia de la humanidad." – Profesor Brand</li>
+            <li>"Cada descubrimiento nos acerca a comprender nuestro lugar en el cosmos." – Científico no identificado</li>
+            <li>"La curiosidad humana es la chispa que enciende la exploración." – Profesor Brand</li>
+            <li>"Sin riesgo, no hay avance científico." – Cooper</li>
+            <li>"La física es nuestro mapa en el viaje hacia lo desconocido." – Profesor Brand</li>
+            <li>"El universo no espera; debemos actuar con precisión y valentía." – Amelia Brand</li>
+            <li>"Incluso los cálculos más complejos no reemplazan la intuición humana." – Científico no identificado</li>
+            <li>"El futuro depende de cómo usamos la ciencia hoy." – Profesor Brand</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECCIÓN: Actores Principales -->
+<div class="section" id="actors">
+    <h2>Actores Principales de Interestellar</h2>
+    
+    <!-- Actor 1: Matthew McConaughey -->
+    <div class="section-flex">
+        <!-- Imagen del actor -->
+        <img src="matthew-mcconaughey.jpg" alt="Matthew McConaughey" class="content-img">
+        <div class="img-info">
+            <h3>Matthew McConaughey – Cooper</h3>
+            <p>Cooper es un piloto e ingeniero agrícola que se une a la misión para salvar a la humanidad.  
+            Su historia combina valentía, amor paternal y sacrificio. Cooper es quien lidera la nave Endurance y enfrenta los desafíos del espacio y la dilatación temporal.</p>
+            <p><strong>Dato curioso:</strong> Matthew se entrenó con expertos en vuelo y simuladores espaciales para representar con realismo a Cooper.</p>
+        </div>
+    </div>
+
+    <!-- Actor 2: Anne Hathaway -->
+    <div class="section-flex">
+        <img src="anne-hathaway.jpg" alt="Anne Hathaway" class="content-img">
+        <div class="img-info">
+            <h3>Anne Hathaway – Amelia Brand</h3>
+            <p>Amelia Brand es científica, astronauta y especialista en planetas habitables.  
+            Su personaje combina la pasión científica con la empatía y el amor, enfrentando decisiones críticas sobre la misión y sus compañeros.</p>
+            <p><strong>Dato curioso:</strong> Anne estudió física y astronomía básica para interpretar mejor los conceptos científicos de la película.</p>
+        </div>
+    </div>
+
+    <!-- Actor 3: Jessica Chastain -->
+    <div class="section-flex">
+        <img src="jessica-chastain.jpg" alt="Jessica Chastain" class="content-img">
+        <div class="img-info">
+            <h3>Jessica Chastain – Murph</h3>
+            <p>Murph es la hija de Cooper y una brillante científica que trabaja para resolver la ecuación de la gravedad.  
+            Su personaje representa la esperanza, la inteligencia y la determinación de la humanidad frente a la adversidad.</p>
+            <p><strong>Dato curioso:</strong> Murph fue inspirada en la idea de que las nuevas generaciones podrían salvar a la humanidad a través de la ciencia.</p>
+        </div>
+    </div>
+
+    <!-- Actor 4: Michael Caine -->
+    <div class="section-flex">
+        <img src="michael-caine.jpg" alt="Michael Caine" class="content-img">
+        <div class="img-info">
+            <h3>Michael Caine – Profesor Brand</h3>
+            <p>Profesor Brand es el mentor de la misión, científico experto en gravedad y encargado de preparar la ecuación que permitirá a la humanidad abandonar la Tierra.  
+            Representa la sabiduría, la paciencia y el sacrificio en pos del bien mayor.</p>
+            <p><strong>Dato curioso:</strong> Michael Caine aportó la voz de la experiencia y la calma, siendo un pilar de realismo en la película.</p>
+        </div>
+    </div>
+</div>
+
+<!-- CSS adicional para los actores -->
+<style>
+#actors h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+#actors .section-flex {
+    margin-bottom: 40px;
+    flex-wrap: wrap; /* Asegura que se ajuste en pantallas pequeñas */
+    align-items: center;
+}
+
+#actors .content-img {
+    max-width: 250px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #fff;
+    margin-bottom: 15px;
+}
+
+#actors .img-info {
+    max-width: 600px;
+    text-align: left;
+    font-size: 1.2em;
+    margin-left: 20px;
+}
+
+@media(max-width: 800px){
+    #actors .section-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+    #actors .img-info {
+        margin-left: 0;
+    }
+}
+</style>
+
+<!-- SECCIÓN: Importancia y Aporte Científico -->
+<div class="section" id="importance">
+    <h2>Importancia de Interestellar y Aporte Científico</h2>
+    <div class="section-flex">
+        <!-- Imagen relacionada con ciencia/espacio -->
+        <img src="science-importance.jpg" alt="Aporte Científico Interestellar" class="content-img">
+        <div class="img-info">
+            <p>Interestellar no es solo una película de ciencia ficción, sino también un puente entre la ciencia y la narrativa cinematográfica.  
+            La película mostró conceptos complejos como la relatividad, los agujeros negros y la dilatación temporal de manera visualmente impresionante y comprensible para el público.</p>
+            <p><strong>Aporte científico:</strong> Consultores de física y matemáticas reales ayudaron a crear visualizaciones precisas de fenómenos como Gargantua, el agujero negro supermasivo, y los efectos gravitacionales en los planetas cercanos. Esto inspiró a millones de personas a interesarse por la ciencia y la exploración espacial.</p>
+            <p>Su importancia radica en mostrar cómo la curiosidad, la investigación y la cooperación científica pueden guiar a la humanidad hacia el futuro, incluso frente a retos extremos.</p>
+        </div>
+    </div>
+</div>
+
+<!-- CSS adicional para la sección -->
+<style>
+#importance h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#importance .section-flex {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#importance .content-img {
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 25px #0ff;
+    margin-bottom: 20px;
+}
+
+#importance .img-info {
+    max-width: 700px;
+    font-size: 1.2em;
+    line-height: 1.6em;
+}
+</style>
+
+<!-- SECCIÓN: Cierre Épico -->
+<div class="section" id="final">
+    <h2>Gracias por viajar con nosotros</h2>
+    <div class="section-flex">
+        <!-- Imagen de fondo de cierre -->
+        <img src="final-epic.jpg" alt="Cierre Interestellar" class="content-img">
+        <div class="img-info">
+            <p>Has explorado los secretos del universo junto a la tripulación de la Endurance,  
+            descubierto planetas misteriosos, enfrentado agujeros negros y conocido a los héroes que hacen posible la misión.</p>
+            <p>Recuerda que la curiosidad, la ciencia y el amor por lo desconocido son lo que nos impulsa a seguir adelante.  
+            Cada estrella que miras tiene una historia, y tú ahora eres parte de este viaje épico.</p>
+            <p><strong>Nos vemos en las estrellas…</strong></p>
+        </div>
+    </div>
+</div>
+
+<!-- CSS para la sección de cierre -->
+<style>
+#final {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#final h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#final .section-flex {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#final .content-img {
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 30px #0ff;
+    margin-bottom: 20px;
+}
+
+#final .img-info {
+    max-width: 700px;
+    font-size: 1.2em;
+    line-height: 1.5em;
+}
+</style>
+
+    <!-- Botón volver -->
+    <a href="index.html" class="back-btn">Volver</a>
+</div>
+
+<script>
+    // Estrellas animadas con efecto cometas
+    const numStars = 200;
+    const starsContainer = document.getElementById('stars-container');
+    const stars = [];
+
+    for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+
+        const size = Math.random() * 2 + 1;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+
+        let x = Math.random() * window.innerWidth;
+        let y = Math.random() * window.innerHeight;
+
+        star.style.left = x + 'px';
+        star.style.top = y + 'px';
+
+        starsContainer.appendChild(star);
+
+        const isComet = Math.random() < 0.05;
+        const speedMultiplier = isComet ? 3 : 1;
+
+        stars.push({
+            element: star,
+            x, y,
+            speedX: (Math.random() - 0.5) * 0.2 * speedMultiplier,
+            speedY: (Math.random() - 0.5) * 0.2 * speedMultiplier,
+            blinkSpeed: Math.random() * 0.05
+        });
+    }
+
+    function animateStars() {
+        for (let star of stars) {
+            star.x += star.speedX;
+            star.y += star.speedY;
+
+            if (star.x < 0) star.x = window.innerWidth;
+            if (star.x > window.innerWidth) star.x = 0;
+            if (star.y < 0) star.y = window.innerHeight;
+            if (star.y > window.innerHeight) star.y = 0;
+
+            let opacity = parseFloat(star.element.style.opacity) || 0.8;
+            opacity += (Math.random() - 0.5) * star.blinkSpeed;
+            opacity = Math.min(Math.max(opacity, 0.1), 1);
+            star.element.style.opacity = opacity;
+
+            star.element.style.left = star.x + 'px';
+            star.element.style.top = star.y + 'px';
+        }
+        requestAnimationFrame(animateStars);
+    }
+    animateStars();
+
+    // Música de fondo
+    const music = document.getElementById('background-music');
+    window.addEventListener('load', () => {
+        music.play().catch(() => {
+            const playBtn = document.createElement('button');
+            playBtn.textContent = "Reproducir música";
+            playBtn.classList.add('back-btn');
+            playBtn.style.marginTop = "20px";
+            playBtn.onclick = () => music.play();
+            document.body.appendChild(playBtn);
+        });
+    });
+
+    // Botón Play/Pause música
+    const musicBtn = document.getElementById('music-toggle');
+    musicBtn.addEventListener('click', () => {
+        if (music.paused) {
+            music.play();
+            musicBtn.textContent = "Pausar música";
+        } else {
+            music.pause();
+            musicBtn.textContent = "Reproducir música";
+        }
+    });
+
+    // Fade-in al hacer scroll
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.2 });
+    sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>
